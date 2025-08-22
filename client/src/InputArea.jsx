@@ -4,8 +4,9 @@ export default function InputArea(props) {
   const [inputText, setInputText] = useState("");
 
   function handleChange(event) {
-    setInputText(event.target.value);
-  }
+    const newValue = event.target.value;
+    setInputText(newValue);
+  } 
 
   return (
     <div className="flex w-full max-w-md gap-2">
@@ -21,7 +22,7 @@ export default function InputArea(props) {
           props.onAdd(inputText);
           setInputText("");
         }}
-        className="px-4 py-2 bg-blue-500 rounded hover:bg-blue-600 transition"
+        className="px-4 py-2 bg-purple-600 rounded hover:bg-purple-400 transition"
       >
         Add
       </button>
