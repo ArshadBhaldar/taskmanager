@@ -20,17 +20,18 @@ const sampleNotes = [
   {
     title: "Meeting Notes: Q3 Planning",
     content:
-      "Discussed Q3 goals, allocated resources, set preliminary deadlines for marketing campaigns and product development. Actions: follow up with John on budget, prepare",
+      "Discussed Q3 goals, allocated resources, set preliminary deadlines for marketing campaigns and product development.",
     tags: ["Work", "Reminders"],
   },
   {
     title: "Quote of the Day",
-    content: 'The best way to predict the future is to create it. - Peter Drucker',
+    content: "The best way to predict the future is to create it. - Peter Drucker",
     tags: ["Quotes", "Inspiration"],
   },
   {
     title: "Weekend Plans",
-    content: "Hiking in the national park, visit the new art exhibition downtown, meal prep for the week.",
+    content:
+      "Hiking in the national park, visit the new art exhibition downtown, meal prep for the week.",
     tags: ["Personal", "Ideas"],
   },
 ];
@@ -47,7 +48,7 @@ const sampleTags = [
 
 export default function JournalNotesPage() {
   const [journal, setJournal] = useState(
-    "Today marks the end of a surprisingly productive week. I managed to tackle several long-standing tasks, which has given me a great sense of accomplishment. The new technique for time blocking has truly made a difference in maintaining focus. \n\nI spent the morning reviewing the new project proposal and provided some initial feedback. It's exciting to see the team's ideas taking shape. In the afternoon, I dedicated time to learning about advanced React hooks, particularly useReducer and useContext. The initial learning curve was steep, but the patterns are starting to click.\n\nEvening was reserved for personal growth—reading 'Atomic Habits' by James Clear. The concept of habit stacking is something I definitely want to integrate more consciously into my routine. It's not just about willpower, but about designing an environment that makes good habits inevitable and bad ones impossible."
+    "Today marks the end of a surprisingly productive week. I managed to tackle several long-standing tasks, which has given me a great sense of accomplishment. I dedicated time to learning React hooks — especially useReducer and useContext. The patterns are starting to click!\n\nEvening was reserved for personal growth—reading 'Atomic Habits' by James Clear. The concept of habit stacking is something I want to apply more consciously in my routine."
   );
   const [selectedTag, setSelectedTag] = useState("All Notes");
   const [notes, setNotes] = useState(sampleNotes);
@@ -58,84 +59,100 @@ export default function JournalNotesPage() {
       : notes.filter((n) => n.tags.includes(selectedTag));
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      {/* Sidebar assumed in main layout */}
-      <main className="flex-1 px-12 py-10">
-        {/* Journal entry section */}
-        <section className="bg-white rounded-xl shadow p-7 mb-8">
-          <header className="flex items-center mb-3">
-            <h2 className="text-lg font-semibold mr-6 flex items-center">
+    <div className="min-h-screen bg-gradient-to-tr from-indigo-50 via-blue-50 to-purple-50 py-10">
+      <main className="max-w-7xl mx-auto px-8">
+        {/* Journal Entry Section */}
+        <section className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl p-8 mb-10 border-l-8 border-indigo-300 relative">
+          <div className="absolute right-6 top-4 opacity-5 text-8xl font-bold text-indigo-500 pointer-events-none">
+            📖
+          </div>
+
+          <header className="flex items-center mb-4">
+            <h2 className="text-2xl font-bold text-indigo-800 flex items-center">
               <span role="img" aria-label="calendar" className="mr-2">📅</span>
               Friday, July 26, 2024
             </h2>
-            <button className="px-2 py-1 rounded border text-sm ml-4 hover:bg-gray-100 transition">Today</button>
-            {/* Simple dots for carousel navigation */}
-            <div className="flex mx-6 gap-1">
-              {[1, 2, 3, 4, 5].map((n) => (
-                <div
-                  key={n}
-                  className={`h-2 w-2 rounded-full ${n === 1 ? 'bg-blue-600' : 'bg-gray-300'}`}
-                />
-              ))}
-            </div>
-            <input
-              className="ml-auto border rounded-md px-3 py-1 focus:ring w-72"
-              type="text"
-              placeholder="Search journal entries..."
-            />
+            <button className="ml-4 border border-indigo-300 text-indigo-600 px-4 py-1 rounded-full text-sm font-medium hover:bg-indigo-100 transition">
+              Today
+            </button>
           </header>
-          <div className="mb-3">
-            <label className="font-semibold" htmlFor="journal">Reflections on a Productive Week</label>
-            <textarea
-              id="journal"
-              className="w-full mt-1 border rounded-lg px-3 py-2 text-gray-800 focus:ring focus:outline-none min-h-[120px] bg-gray-50"
-              value={journal}
-              onChange={e => setJournal(e.target.value)}
-            />
-          </div>
-          <button className="bg-blue-600 text-white px-5 py-2 rounded font-medium hover:bg-blue-700 mt-2">
+
+          <label htmlFor="journal" className="block font-semibold text-indigo-700 mb-2">
+            Reflections on a Productive Week
+          </label>
+          <textarea
+            id="journal"
+            className="w-full rounded-xl border-2 border-indigo-200 bg-white/40 px-4 py-3 text-gray-800 shadow-inner focus:ring-2 focus:ring-indigo-400 transition min-h-[140px]"
+            value={journal}
+            onChange={(e) => setJournal(e.target.value)}
+          />
+          <button className="mt-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-2 rounded-lg shadow hover:scale-105 transition font-semibold">
             Save Entry
           </button>
         </section>
-        {/* Notes section */}
-        <section className="bg-white rounded-xl shadow p-7">
-          <header className="flex items-center mb-4">
-            <div className="flex gap-2 mr-4 flex-wrap">
+
+        {/* Notes Section */}
+        <section className="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-8 border-l-8 border-blue-300 relative">
+          <div className="absolute right-6 top-4 opacity-5 text-7xl text-blue-500 font-bold pointer-events-none">
+            🗒️
+          </div>
+          <header className="flex items-center mb-6">
+            <div className="flex flex-wrap gap-2">
               {sampleTags.map((tag) => (
                 <button
                   key={tag}
                   onClick={() => setSelectedTag(tag)}
-                  className={`px-4 py-1 rounded-full border text-sm mr-2 mb-2
-                    ${selectedTag === tag
-                      ? "bg-blue-600 text-white border-blue-600"
-                      : "bg-white text-gray-700 border-gray-300 hover:bg-blue-50"}
-                  `}
+                  className={`px-4 py-1 text-sm rounded-full border font-medium transition-all
+                    ${
+                      selectedTag === tag
+                        ? "bg-gradient-to-r from-blue-600 to-purple-500 text-white border-transparent"
+                        : "bg-white text-gray-600 border-gray-300 hover:bg-blue-50 hover:text-blue-700"
+                    }`}
                 >
                   {tag}
                 </button>
               ))}
             </div>
             <button
-              className="ml-auto text-sm flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+              className="ml-auto px-5 py-2 text-sm rounded-lg shadow font-semibold bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:scale-105 transition"
               onClick={() => alert("Add new note!")}
             >
               + New Note
             </button>
           </header>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {filteredNotes.map((note, idx) => (
-              <div key={idx} className="bg-gray-100 rounded-lg p-5 shadow-sm relative">
-                <div className="flex justify-between items-center mb-2">
-                  <h3 className="font-semibold text-base">{note.title}</h3>
-                  <div className="flex gap-2">
-                    <button className="text-gray-400 hover:text-gray-700" title="Edit"><span role="img" aria-label="edit">✏️</span></button>
-                    <button className="text-gray-400 hover:text-red-500" title="Delete"><span role="img" aria-label="delete">🗑️</span></button>
+              <div
+                key={idx}
+                className="bg-white/80 backdrop-blur-sm rounded-2xl border-2 border-indigo-100 p-5 shadow-md hover:shadow-lg transition relative hover:border-blue-300"
+              >
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="text-lg font-bold text-indigo-800 leading-snug">{note.title}</h3>
+                  <div className="flex gap-2 text-sm">
+                    <button
+                      className="text-gray-400 hover:text-green-600 transition"
+                      title="Edit"
+                    >
+                      ✏️
+                    </button>
+                    <button
+                      className="text-gray-400 hover:text-red-600 transition"
+                      title="Delete"
+                    >
+                      🗑️
+                    </button>
                   </div>
                 </div>
-                <p className="text-gray-700 mb-2 text-sm">{note.content}</p>
-                <div className="flex flex-wrap gap-1">
+                <p className="text-gray-600 text-sm mb-3 leading-snug">{note.content}</p>
+                <div className="flex flex-wrap gap-2">
                   {note.tags.map((tag, i) => (
-                    <span key={i} className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full text-xs">{tag}</span>
+                    <span
+                      key={i}
+                      className="bg-gradient-to-r from-indigo-100 to-blue-100 text-indigo-700 px-3 py-0.5 rounded-full text-xs font-medium shadow-sm"
+                    >
+                      {tag}
+                    </span>
                   ))}
                 </div>
               </div>

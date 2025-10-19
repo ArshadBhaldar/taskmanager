@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/ArshadBhaldar/Task-Manager/issues"
   },
-  "homepage": "https://github.com/ArshadBhaldar/Task-Manager#readme"
+  "homepage": "https://github.com/ArshadBhaldar/Task-Manager#readme",
+  "devDependencies": {
+    "tailwindcss": "^4.1.14"
+  }
 }
